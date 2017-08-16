@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.result {
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  flex-basis: 18%;
+  text-align: center;
+}
+
+.result p {
+  text-align: left;
+}
+
+.name {
+  color: #2541B2;
+  font-size: 20px;
+}
+
+.info {
+  color: gray;
+}
