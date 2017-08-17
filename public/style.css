@@ -29,3 +29,7 @@ h1 {
 .info {
   color: gray;
 }
+
+a {
+  text-decoration: none;
+}

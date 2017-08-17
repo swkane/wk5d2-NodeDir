@@ -9,11 +9,11 @@
     <h1>I Mustache You to Check out My Directory</h1>
     <section class="results">
     {{#users}}
-    <div class="result">
+    <a href="/users/{{id}}" class="result">
       <img src="{{avatar}}" alt="profile">
       <p class="name">{{name}}</p>
       <p class="info">{{job}} {{company}}</p>
-    </div>
+    </a>
     {{/users}}
   </section>
 

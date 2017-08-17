@@ -16,7 +16,9 @@ app.get("/", function(req, res){
 
 // TODO: set up a click event to redirect to the id of the result that was clicked
 app.get("/users/:id", function(req, res){
-  res.render('profile', data);
+  let myIndex = req.params.id -1;
+  let profile = data.users[myIndex];
+  res.render('profile', profile);
 });
 
 app.listen(3000, function(){
