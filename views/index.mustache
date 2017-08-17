@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Stache Cache</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/index.css">
+
   </head>
   <body>
     <h1>I Mustache You to Check out My Directory</h1>
@@ -12,7 +13,12 @@
     <a href="/users/{{id}}" class="result">
       <img src="{{avatar}}" alt="profile">
       <p class="name">{{name}}</p>
+      {{#job}}
       <p class="info">{{job}} {{company}}</p>
+      {{/job}}
+      {{^job}}
+        <p class="unemployed">Available for Hire</p>
+      {{/job}}
     </a>
     {{/users}}
   </section>

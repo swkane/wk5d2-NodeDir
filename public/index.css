@@ -30,6 +30,32 @@ h1 {
   color: gray;
 }
 
+.unemployed {
+  color: red;
+}
+
+.profile .unemployed, .job-info {
+  display: inline;
+}
+
+.profile {
+  /*background-color: green;*/
+  width: 75%;
+  border: 1px solid gray;
+}
+
+.profile img {
+  float: left;
+  margin: 30px;
+  border: 1px solid black;
+  border-radius: 100%;
+}
+
+.profile span {
+  font-weight: bold;
+  margin-right: 30px;
+}
+
 a {
   text-decoration: none;
 }
