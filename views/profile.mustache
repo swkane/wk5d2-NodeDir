@@ -12,17 +12,19 @@
 
     <div class="profile">
       <img src="{{avatar}}" alt="profile">
-      <p class="name">{{name}}</p>
-      <p class="job-info">{{#address.city}}{{address.city}}, {{/address.city}}{{address.country}} |</p>
-        {{#job}}
-        <p class="job-info">{{job}} {{company}}</p>
-        {{/job}}
-        {{^job}}
-        <p class="unemployed">Available for Hire</p>
-        {{/job}}
-      <p>{{email}} | {{phone}}</p>
-      {{#university}}<p><span>Education</span>{{university}}</p>{{/university}}
-      <p><span>Skills</span>{{skills}}</p>
+      <div class="profile-info">
+        <p class="name">{{name}}</p>
+        <p class="job-info">{{#address.city}}{{address.city}}, {{/address.city}}{{address.country}} |</p>
+          {{#job}}
+          <p class="job-info">{{job}} {{company}}</p>
+          {{/job}}
+          {{^job}}
+          <p class="unemployed">Available for Hire</p>
+          {{/job}}
+        <p>{{email}} | {{phone}}</p>
+        {{#university}}<p><span>Education</span>{{university}}</p>{{/university}}
+        <p><span>Skills</span><ul>{{#skills}}<li>{{.}}</li>{{/skills}}</ul></p>
+      </div>
     </div>
 
   </section>

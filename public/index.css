@@ -38,6 +38,14 @@ h1 {
   display: inline;
 }
 
+.profile-info {
+  float: right;
+}
+
+li {
+  list-style: none;
+}
+
 .profile {
   /*background-color: green;*/
   width: 75%;
