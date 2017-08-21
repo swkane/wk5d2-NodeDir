@@ -4,24 +4,20 @@ const path = require('path');
 const mustacheExpress = require('mustache-express');
 const app = express();
 
-
-
-
 app.engine('mustache', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mustache');
 app.use(express.static("public"));
+
 app.get("/", function(req, res){
   res.render('index', data);
 });
 
-// TODO: set up a click event to redirect to the id of the result that was clicked
 app.get("/users/:id", function(req, res){
   let myIndex = req.params.id -1;
   let profile = data.users[myIndex];
   res.render('profile', profile);
   // res.render('profile', data);
-
 });
 
 app.listen(3000, function(){
