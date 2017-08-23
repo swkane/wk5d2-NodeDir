@@ -2,15 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Stache Cache</title>
+    <title>Mongo Dir</title>
     <link rel="stylesheet" href="/index.css">
 
   </head>
   <body>
     <h1>I Mustache You to Check out My Directory</h1>
+    <div class="filters">
+      <a href="/employed"><button type="button" name="button">Check Out Robots with Jobs</button></a>
+      <a href="/unemployed"><button type="button" name="button">Check Out Robots Available for Hire</button></a>
+    </div>
     <section class="results">
+
     {{#users}}
-    <a href="/users/{{id}}" class="result">
+    <a href="/profile/{{username}}" class="result">
       <img src="{{avatar}}" alt="profile">
       <p class="name">{{name}}</p>
       {{#job}}

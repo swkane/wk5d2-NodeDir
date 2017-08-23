@@ -1,29 +1,52 @@
 const express = require('express');
-const data = require('./data');
+// const data = require('./data');
+const MongoClient = require('mongodb').MongoClient();
+const assert = require('assert');
 const path = require('path');
 const mustacheExpress = require('mustache-express');
 const app = express();
+const profileController = require('./controllers/profile');
+const unemployedController = require('./controllers/unemployed');
+const employedController = require('./controllers/employed');
 
+// Mustache Boiler Plate
 app.engine('mustache', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mustache');
+
+// Setting up the style sheet
 app.use(express.static("public"));
 
+// Mongo Boiler Plate
+
+// Connection Url
+var url = 'mongodb://localhost:27017/return-dir';
+
+// !! Only run this once to set up mongo
+// Use connect method to conenct to the server
+// MongoClient.connect(url)
+// .then(function(db) {
+//   console.log("Connected Mongo to the Server!");
+//   return db.collection("users").insertMany(data.users);
+// });
+
 app.get("/", function(req, res){
-  res.render('index', data);
+  MongoClient.connect(url)
+    .then(function(db) {
+      db.collection("users")
+      .find().toArray()
+      .then(function(data) {
+        db.close();
+        // console.log(data);
+        res.render('index', {users: data});
+      })
+    })
 });
 
-app.get("/users/:id", function(req, res){
-  let myIndex = req.params.id -1;
-  let profile = data.users[myIndex];
-  res.render('profile', profile);
-  // res.render('profile', data);
-});
+app.use('/unemployed', unemployedController);
+app.use('/employed', employedController);
+app.use('/profile', profileController);
 
 app.listen(3000, function(){
-  console.log("To infinity and beyond!");
+  console.log("Rage Against the (Employable) Machine");
 });
-
-// console.log(data);
-// console.log(data.users);
-// console.log(data.users[0]);
