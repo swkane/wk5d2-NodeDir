@@ -8,11 +8,20 @@
   </head>
   <body>
     <h1>I Mustache You to Check out My Directory</h1>
+    {{#currentUser}}
+    <h3>Welcome, {{currentUser}}</h3>
+    {{/currentUser}}
     <div class="filters">
       <a href="/employed"><button type="button" name="button">Check Out Robots with Jobs</button></a>
       <a href="/unemployed"><button type="button" name="button">Check Out Robots Available for Hire</button></a>
+      {{^currentUser}}
       <a href="/login"><button type="button" name="button">Login</button></a>
       <a href="/create"><button type="button" name="button">Register</button></a>
+      {{/currentUser}}
+      {{#currentUser}}
+      <a href="/logout"><button type="button" name="button">Log Out</button></a>
+      <a href="/edit"><button type="button" name="button">Edit Your Profile</button></a>
+      {{/currentUser}}
 
     </div>
     <section class="results">
