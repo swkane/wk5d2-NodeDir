@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "mongodb": "^2.2.31",
     "mustache-express": "^1.2.5"
