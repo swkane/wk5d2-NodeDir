@@ -73,14 +73,14 @@ app.get('/login', function(req, res) {
 
 app.post('/login', function(req, res) {
   req.session.username = req.body.username;
-  req.session.password = req.body.password;
+  let password = req.body.password;
   MongoClient.connect(url)
   .then(function(db) {
     db.collection('users')
     .findOne({username: req.session.username})
       .then(function (data) {
         db.close()
-        if (bcrypt.compareSync(req.session.password, data.passwordHash)) {
+        if (bcrypt.compareSync(password, data.passwordHash)) {
           res.redirect('/');
         } else {
           res.send('nope');
@@ -97,10 +97,10 @@ app.get('/create', function(req, res) {
 
 app.post('/create/user', function(req, res) {
   console.log("You tried to add a record!");
-  req.session.password = bcrypt.hashSync(req.body.password, 8);
+  let passHash = bcrypt.hashSync(req.body.password, 8);
   MongoClient.connect(url)
     .then(function(db) {
-      var robot = db.collection('users').insertOne({username: req.body.username, name: req.body.name, email: req.body.email, job: req.body.job, company: req.body.company, skills: req.body.skills, university: req.body.university, phone: req.body.phone, address: req.body.address, passwordHash: req.session.password})
+      var robot = db.collection('users').insertOne({username: req.body.username, name: req.body.name, email: req.body.email, job: req.body.job, company: req.body.company, skills: req.body.skills, university: req.body.university, phone: req.body.phone, address: req.body.address, passwordHash: passHash})
       .then(function(user) {
         console.log(user);
       });
@@ -123,10 +123,10 @@ app.get('/edit', function(req, res) {
 
 app.post('/edit/complete', function(req, res) {
   console.log("You tried to add a record!");
-  req.session.password = bcrypt.hashSync(req.body.password, 8);
+  let passHash = bcrypt.hashSync(req.body.password, 8);
   MongoClient.connect(url)
     .then(function(db) {
-      var robot = db.collection('users').updateOne({username: req.session.username}, {$set: {username: req.body.username, name: req.body.name, email: req.body.email, job: req.body.job, company: req.body.company, skills: req.body.skills, university: req.body.university, phone: req.body.phone, address: req.body.address, passwordHash: req.session.password}})
+      var robot = db.collection('users').updateOne({username: req.session.username}, {$set: {username: req.body.username, name: req.body.name, email: req.body.email, job: req.body.job, company: req.body.company, skills: req.body.skills, university: req.body.university, phone: req.body.phone, address: req.body.address, passwordHash: passHash}})
       .then(function(user) {
         console.log(user);
       });
