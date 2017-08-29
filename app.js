@@ -11,7 +11,9 @@ const profileController = require('./controllers/profile');
 const unemployedController = require('./controllers/unemployed');
 const employedController = require('./controllers/employed');
 const session = require('express-session');
+
 // Boiler Plate
+
 // bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -39,6 +41,8 @@ app.use(session({
 //   return db.collection("users").insertMany(data.users);
 // });
 
+// Routes w/o Custom Controllers
+
 app.get("/", function(req, res){
   MongoClient.connect(url)
     .then(function(db) {
@@ -61,6 +65,8 @@ app.get("/", function(req, res){
 //   // $2a$08$eg3hqNOmifK3lX/lKDHzruJGctYFvi1fH50MHGmmMkKOFKsF29kTy
 // })
 
+
+//new route
 app.get('/login', function(req, res) {
   res.render('login');
 });
@@ -83,6 +89,8 @@ app.post('/login', function(req, res) {
   })
 });
 
+
+//new route
 app.get('/create', function(req, res) {
   res.render('createuser');
 });
@@ -96,27 +104,12 @@ app.post('/create/user', function(req, res) {
       .then(function(user) {
         console.log(user);
       });
-      // console.log(db.users.findOne({username: req.body.username}));
       db.close();
   });
-  // album.save()
-  //   .then(function() {
-  //     // actions to take on success
-  //     console.log("User Added Success");
-  //     db.albums.insertOne(album);
-  //   })
-  //   .catch(function() {
-  //     console.log("User Added Record Error");
-  //     // action to take on error
-  //   });
   res.redirect('/');
 });
 
-app.get('/logout', function(req, res) {
-  req.session.destroy();
-  res.redirect('/');
-});
-
+// new route
 app.get('/edit', function(req, res) {
   MongoClient.connect(url, function(err, db) {
     db.collection('users').findOne({username: req.session.username})
@@ -143,10 +136,17 @@ app.post('/edit/complete', function(req, res) {
   res.redirect('/');
 });
 
+//logout
+app.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+// routes w/ controllers
 app.use('/unemployed', unemployedController);
 app.use('/employed', employedController);
 app.use('/profile', profileController);
 
 app.listen(3000, function(){
-  console.log("Hash Slinging Slasher");
+  console.log("Robot Linked In Running on port 3000");
 });
